@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: peterengland-website
-          image: varaprasadrenati/level-devil-game:8071fc84
+          image: varaprasadrenati/level-devil-game:43751044
           ports:
             - containerPort: 3000
           resources:
