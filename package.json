@@ -1,7 +1,7 @@
 {
-  "name": "level-devil-game",
+  "name": "peter-england-clone",
   "version": "1.0.0",
-  "description": "A Level Devil-style rage platformer served using Node.js and Express",
+  "description": "Node + Express multi-page placeholder clone (Peter England style)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
