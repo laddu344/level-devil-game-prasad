@@ -6,10 +6,9 @@
   <title>Level Devil Game</title>
 
   <style>
-    /* Basic layout and color scheme */
     body {
       margin: 0;
-      background-color: #8b5e00; /* dark brown background */
+      background-color: #8b5e00;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,15 +17,9 @@
     }
 
     #gameCanvas {
-      background-color: #e2a74b; /* light yellow-orange platform area */
+      background-color: #e2a74b;
       border: 3px solid #5a3b00;
-      image-rendering: pixelated; /* keeps retro look */
-    }
-
-    h1 {
-      text-align: center;
-      font-family: 'Press Start 2P', monospace;
-      color: white;
+      image-rendering: pixelated;
     }
   </style>
 </head>
@@ -34,11 +27,10 @@
 <body>
   <canvas id="gameCanvas" width="800" height="400"></canvas>
 
-  <!-- Load the main game logic -->
-  <script src="game.js"></script>
+  <!-- Correct relative path for JS -->
+  <script src="./game.js"></script>
 
   <script>
-    // Ensure canvas receives keyboard input immediately
     window.onload = () => {
       const canvas = document.getElementById('gameCanvas');
       canvas.setAttribute('tabindex', '0');
