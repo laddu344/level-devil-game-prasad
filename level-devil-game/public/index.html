@@ -1,41 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Level Devil Game</title>
-
-  <style>
-    body {
-      margin: 0;
-      background-color: #8b5e00;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #gameCanvas {
-      background-color: #e2a74b;
-      border: 3px solid #5a3b00;
-      image-rendering: pixelated;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brand — Home (Placeholder)</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
-
 <body>
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
+  <header class="header">
+    <div class="nav container">
+      <div class="logo">
+        <img src="https://via.placeholder.com/120x36?text=LOGO" alt="logo"/>
+        <div style="color:#fff">Brand Placeholder</div>
+      </div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/men">Men</a>
+        <a href="/new-arrivals">New Arrivals</a>
+        <a href="/offers">Offers</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <!-- Correct relative path for JS -->
-  <script src="./game.js"></script>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="banner">
+        <h1>Timeless Shirts • New Season</h1>
+        <p>Modern fits, premium fabrics — placeholder content for demo.</p>
+        <a href="/men" class="cta">Shop Men</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://via.placeholder.com/420x260?text=Hero+Banner" alt="hero" style="width:100%; border-radius:6px;">
+      </div>
+    </div>
+  </section>
 
-  <script>
-    window.onload = () => {
-      const canvas = document.getElementById('gameCanvas');
-      canvas.setAttribute('tabindex', '0');
-      canvas.focus();
-    };
-  </script>
+  <main class="container">
+    <h2 style="margin-top:18px;">Popular Picks</h2>
+    <div class="grid">
+      <!-- 8 sample product cards -->
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+1" alt="">
+        <h3>Classic Shirt</h3>
+        <p>₹999</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+2" alt="">
+        <h3>Formal Shirt</h3>
+        <p>₹1199</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+3" alt="">
+        <h3>Casual Tee</h3>
+        <p>₹699</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+4" alt="">
+        <h3>Polo</h3>
+        <p>₹799</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+5" alt="">
+        <h3>Chinos</h3>
+        <p>₹1399</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+6" alt="">
+        <h3>Jacket</h3>
+        <p>₹2499</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+7" alt="">
+        <h3>Shorts</h3>
+        <p>₹599</p>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x300?text=Product+8" alt="">
+        <h3>Accessories</h3>
+        <p>₹299</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <img src="https://via.placeholder.com/120x36?text=LOGO" alt="logo">
+        <p style="max-width:320px; color:#bbb;">This is a placeholder site built for demo purposes only.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff">Customer Service</h4>
+        <a href="/contact">Contact</a>
+        <a href="/offers">Offers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>
