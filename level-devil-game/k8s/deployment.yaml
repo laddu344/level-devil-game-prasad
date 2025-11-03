@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: peterengland-website
-          image: varaprasadrenati/peterengland-website:latest   # 👉 use your Docker Hub image here
+          image: varaprasadrenati/level-devil-game:8071fc84
           ports:
             - containerPort: 3000
           resources:
