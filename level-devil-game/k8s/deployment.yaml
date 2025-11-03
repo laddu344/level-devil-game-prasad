@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: level-devil-game
+  labels:
+    app: level-devil-game
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: level-devil-game
+  template:
+    metadata:
+      labels:
+        app: level-devil-game
+    spec:
+      containers:
+      - name: level-devil-game
+        image: varaprasadrenati/level-devil-game:latest
+        ports:
+        - containerPort: 3000
