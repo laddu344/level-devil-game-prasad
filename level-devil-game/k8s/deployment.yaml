@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: level-devil-game
-        image: varaprasadrenati/level-devil-game:c056cdcc
+        image: varaprasadrenati/level-devil-game:cb681841
         ports:
         - containerPort: 3000
