@@ -1,21 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: level-devil-game
+  name: peterengland-website
   labels:
-    app: level-devil-game
+    app: peterengland-website
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: level-devil-game
+      app: peterengland-website
   template:
     metadata:
       labels:
-        app: level-devil-game
+        app: peterengland-website
     spec:
       containers:
-      - name: level-devil-game
-        image: varaprasadrenati/level-devil-game:4fcf2aeb
-        ports:
-        - containerPort: 3000
+        - name: peterengland-website
+          image: varaprasadrenati/peterengland-website:latest   # 👉 use your Docker Hub image here
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
