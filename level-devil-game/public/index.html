@@ -4,21 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Level Devil Game</title>
+
   <style>
+    /* Basic layout and color scheme */
     body {
       margin: 0;
-      background: #8b5e00;
+      background-color: #8b5e00; /* dark brown background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       overflow: hidden;
     }
-    canvas {
-      background: #c89135;
-      display: block;
-      margin: 0 auto;
+
+    #gameCanvas {
+      background-color: #e2a74b; /* light yellow-orange platform area */
+      border: 3px solid #5a3b00;
+      image-rendering: pixelated; /* keeps retro look */
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Press Start 2P', monospace;
+      color: white;
     }
   </style>
 </head>
+
 <body>
   <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+  <!-- Load the main game logic -->
   <script src="game.js"></script>
+
+  <script>
+    // Ensure canvas receives keyboard input immediately
+    window.onload = () => {
+      const canvas = document.getElementById('gameCanvas');
+      canvas.setAttribute('tabindex', '0');
+      canvas.focus();
+    };
+  </script>
 </body>
 </html>
