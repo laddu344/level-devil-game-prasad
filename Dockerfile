@@ -1,7 +1,20 @@
+# Use Node.js 18 base image
 FROM node:18-alpine
+
+# Set working directory inside container
 WORKDIR /app
-COPY level-devil-game/package*.json ./
+
+# Copy package files from project root
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
-COPY level-devil-game/ .
+
+# Copy rest of the app files (everything in project)
+COPY . .
+
+# Expose port 3000 for the game server
 EXPOSE 3000
+
+# Start the Node.js server
 CMD ["node", "server.js"]
