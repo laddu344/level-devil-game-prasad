@@ -1,77 +1,118 @@
-let player;
-let cursors;
-let spikes;
-let ground;
-let gameOver = false;
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-const config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  backgroundColor: "#222",
-  physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { y: 800 },
-      debug: false
-    }
-  },
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  }
+// Load images
+const playerImg = new Image();
+playerImg.src = './assets/player.png';
+
+const spikeImg = new Image();
+spikeImg.src = './assets/spikes.png';
+
+const tileImg = new Image();
+tileImg.src = './assets/tiles.png';
+
+const doorColor = '#b8b8b8'; // door placeholder color
+
+// Game variables
+let gravity = 0.6;
+let floorY = 300;
+let isGameOver = false;
+
+// Player object
+let player = {
+  x: 50,
+  y: floorY - 40,
+  width: 20,
+  height: 40,
+  dx: 0,
+  dy: 0,
+  speed: 4,
+  jumping: false
 };
 
-const game = new Phaser.Game(config);
+// Door and spike positions
+const door = { x: 700, y: floorY - 50, width: 30, height: 50 };
+const spikes = [{ x: 400, y: floorY - 20, width: 30, height: 20 }];
 
-function preload() {
-  this.load.image("player", "assets/player.png");
-  this.load.image("ground", "assets/ground.png");
-  this.load.image("spike", "assets/spike.png");
-}
+// Keyboard controls
+const keys = {};
+document.addEventListener('keydown', e => (keys[e.key] = true));
+document.addEventListener('keyup', e => (keys[e.key] = false));
 
-function create() {
-  ground = this.physics.add.staticGroup();
-  ground.create(400, 580, "ground").setScale(2).refreshBody();
-
-  spikes = this.physics.add.staticGroup();
-  spikes.create(600, 540, "spike");
-  spikes.create(200, 540, "spike");
-
-  player = this.physics.add.sprite(100, 450, "player");
-  player.setBounce(0.2);
-  player.setCollideWorldBounds(true);
-
-  cursors = this.input.keyboard.createCursorKeys();
-
-  this.physics.add.collider(player, ground);
-  this.physics.add.collider(player, spikes, hitSpike, null, this);
-}
-
+// Game loop
 function update() {
-  if (gameOver) return;
+  if (isGameOver) return;
 
-  if (cursors.left.isDown) {
-    player.setVelocityX(-200);
-  } else if (cursors.right.isDown) {
-    player.setVelocityX(200);
-  } else {
-    player.setVelocityX(0);
+  // Move left/right
+  if (keys['ArrowLeft']) player.dx = -player.speed;
+  else if (keys['ArrowRight']) player.dx = player.speed;
+  else player.dx = 0;
+
+  // Jump
+  if (keys['ArrowUp'] && !player.jumping) {
+    player.dy = -12;
+    player.jumping = true;
   }
 
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-450);
+  // Gravity
+  player.dy += gravity;
+  player.x += player.dx;
+  player.y += player.dy;
+
+  // Floor collision
+  if (player.y + player.height >= floorY) {
+    player.y = floorY - player.height;
+    player.dy = 0;
+    player.jumping = false;
   }
+
+  // Check spikes
+  for (let s of spikes) {
+    if (
+      player.x < s.x + s.width &&
+      player.x + player.width > s.x &&
+      player.y < s.y + s.height &&
+      player.y + player.height > s.y
+    ) {
+      isGameOver = true;
+      alert('💀 You hit a spike!');
+      location.reload();
+    }
+  }
+
+  // Door collision (win)
+  if (
+    player.x < door.x + door.width &&
+    player.x + player.width > door.x &&
+    player.y < door.y + door.height &&
+    player.y + player.height > door.y
+  ) {
+    alert('🎉 Level Complete!');
+    location.reload();
+  }
+
+  draw();
+  requestAnimationFrame(update);
 }
 
-function hitSpike(player, spike) {
-  this.physics.pause();
-  player.setTint(0xff0000);
-  gameOver = true;
+// Draw game scene
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  setTimeout(() => {
-    this.scene.restart();
-    gameOver = false;
-  }, 1000);
+  // Draw floor (tiles)
+  ctx.drawImage(tileImg, 0, floorY, canvas.width, 40);
+
+  // Draw spikes
+  for (let s of spikes) {
+    ctx.drawImage(spikeImg, s.x, s.y, s.width, s.height);
+  }
+
+  // Draw door
+  ctx.fillStyle = doorColor;
+  ctx.fillRect(door.x, door.y, door.width, door.height);
+
+  // Draw player
+  ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 }
+
+tileImg.onload = update;
