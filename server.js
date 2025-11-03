@@ -4,9 +4,10 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Correct static path
+// Serve static files from /public
 app.use(express.static(path.join(__dirname, "public")));
 
+// Serve index.html for root
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
