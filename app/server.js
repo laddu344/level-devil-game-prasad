@@ -3,29 +3,29 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, "public")));
+// ✅ Corrected static folder path
+app.use(express.static(path.join(__dirname, "../level-devil-game/public")));
 
-// Routes for each page
+// ✅ Routes for each page
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "../level-devil-game/public", "index.html"));
 });
 app.get("/men", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "men.html"));
+  res.sendFile(path.join(__dirname, "../level-devil-game/public", "men.html"));
 });
 app.get("/new-arrivals", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "new-arrivals.html"));
+  res.sendFile(path.join(__dirname, "../level-devil-game/public", "new-arrivals.html"));
 });
 app.get("/offers", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "offers.html"));
+  res.sendFile(path.join(__dirname, "../level-devil-game/public", "offers.html"));
 });
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "contact.html"));
+  res.sendFile(path.join(__dirname, "../level-devil-game/public", "contact.html"));
 });
 
 // Default fallback for 404 routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "public", "index.html"));
+  res.status(404).sendFile(path.join(__dirname, "../level-devil-game/public", "index.html"));
 });
 
 app.listen(PORT, () => {
