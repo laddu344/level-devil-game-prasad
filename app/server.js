@@ -3,34 +3,29 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🧭 Compute full path safely
-const publicPath = path.join(__dirname, "../level-devil-game/public");
+// ✅ Point to public folder correctly (one level up from /app)
+app.use(express.static(path.join(__dirname, "../public")));
 
-console.log("🗂️ Serving static files from:", publicPath);
-
-// ✅ Serve static files
-app.use(express.static(publicPath));
-
-// ✅ Routes
+// ✅ Main pages
 app.get("/", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 app.get("/men", (req, res) => {
-  res.sendFile(path.join(publicPath, "men.html"));
+  res.sendFile(path.join(__dirname, "../public", "men.html"));
 });
 app.get("/new-arrivals", (req, res) => {
-  res.sendFile(path.join(publicPath, "new-arrivals.html"));
+  res.sendFile(path.join(__dirname, "../public", "new-arrivals.html"));
 });
 app.get("/offers", (req, res) => {
-  res.sendFile(path.join(publicPath, "offers.html"));
+  res.sendFile(path.join(__dirname, "../public", "offers.html"));
 });
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(publicPath, "contact.html"));
+  res.sendFile(path.join(__dirname, "../public", "contact.html"));
 });
 
-// ✅ Fallback for unknown routes
+// ✅ Fallback (for 404s or wrong routes)
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(publicPath, "index.html"));
+  res.status(404).sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 app.listen(PORT, () => {
