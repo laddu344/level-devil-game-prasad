@@ -3,29 +3,29 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Serve static files (css, js, images)
-app.use(express.static(__dirname));
+// ✅ Serve static files (css, js, images) from the parent folder
+app.use(express.static(path.join(__dirname, "../")));
 
-// ✅ Routes for HTML pages
+// ✅ Routes for HTML pages (look one level up)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
 app.get("/men", (req, res) => {
-  res.sendFile(path.join(__dirname, "men.html"));
+  res.sendFile(path.join(__dirname, "../men.html"));
 });
 app.get("/new-arrivals", (req, res) => {
-  res.sendFile(path.join(__dirname, "new-arrivals.html"));
+  res.sendFile(path.join(__dirname, "../new-arrivals.html"));
 });
 app.get("/offers", (req, res) => {
-  res.sendFile(path.join(__dirname, "offers.html"));
+  res.sendFile(path.join(__dirname, "../offers.html"));
 });
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(__dirname, "contact.html"));
+  res.sendFile(path.join(__dirname, "../contact.html"));
 });
 
 // ✅ Fallback for unknown routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "index.html"));
+  res.status(404).sendFile(path.join(__dirname, "../index.html"));
 });
 
 app.listen(PORT, () => {
