@@ -3,27 +3,34 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Go up two folders (from /app → /level-devil-game-prasad)
-app.use(express.static(path.join(__dirname, "../../level-devil-game/public")));
+// 🧭 Compute full path safely
+const publicPath = path.join(__dirname, "../level-devil-game/public");
 
+console.log("🗂️ Serving static files from:", publicPath);
+
+// ✅ Serve static files
+app.use(express.static(publicPath));
+
+// ✅ Routes
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../level-devil-game/public", "index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 app.get("/men", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../level-devil-game/public", "men.html"));
+  res.sendFile(path.join(publicPath, "men.html"));
 });
 app.get("/new-arrivals", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../level-devil-game/public", "new-arrivals.html"));
+  res.sendFile(path.join(publicPath, "new-arrivals.html"));
 });
 app.get("/offers", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../level-devil-game/public", "offers.html"));
+  res.sendFile(path.join(publicPath, "offers.html"));
 });
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../level-devil-game/public", "contact.html"));
+  res.sendFile(path.join(publicPath, "contact.html"));
 });
 
+// ✅ Fallback for unknown routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "../../level-devil-game/public", "index.html"));
+  res.status(404).sendFile(path.join(publicPath, "index.html"));
 });
 
 app.listen(PORT, () => {
