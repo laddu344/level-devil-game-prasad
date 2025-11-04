@@ -1,17 +1,19 @@
-# Use Node.js LTS version
+# Use Node.js image
 FROM node:18
 
-# Set working directory inside container
+# Create app directory
 WORKDIR /app
 
-# Copy app files
-COPY app/package*.json ./
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the app
-COPY app .
+# Copy all source files to container
+COPY . .
 
-# Expose port 3000
+# Expose the app port
 EXPOSE 3000
 
 # Start the server
