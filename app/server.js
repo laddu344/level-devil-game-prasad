@@ -3,33 +3,29 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Serve static files from "../public"
-app.use(express.static(path.join(__dirname, "../public")));
+// ✅ Serve static files (css, js, images)
+app.use(express.static(__dirname));
 
-// ✅ Routes
+// ✅ Routes for HTML pages
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
-
 app.get("/men", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "men.html"));
+  res.sendFile(path.join(__dirname, "men.html"));
 });
-
 app.get("/new-arrivals", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "new-arrivals.html"));
+  res.sendFile(path.join(__dirname, "new-arrivals.html"));
 });
-
 app.get("/offers", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "offers.html"));
+  res.sendFile(path.join(__dirname, "offers.html"));
 });
-
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "contact.html"));
+  res.sendFile(path.join(__dirname, "contact.html"));
 });
 
-// ✅ Fallback for any other route
+// ✅ Fallback for unknown routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "../public", "index.html"));
+  res.status(404).sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(PORT, () => {
